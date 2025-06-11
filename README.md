@@ -1,4 +1,5 @@
-#👋 Hi, I'm Samantha Rianne T. Mariano
+👋 Hi, I'm Samantha Rianne T. Mariano
+
 **🎨 Front-End Developer | 💻 Graphic Designer**
 
 I'm a dedicated and confident self-learner passionate about exploring and mastering new skills. With a strong foundation in Web Development, Graphic Design, and Android Development, I aim to contribute my knowledge and creativity to innovative and professional projects.
