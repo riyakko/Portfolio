@@ -1,6 +1,4 @@
-# Personalized Portfolio
-
-👋 Hi, I'm Samantha Rianne T. Mariano
+# Hi, I'm Samantha Rianne T. Mariano
 
 **🎨 Front-End Developer | 💻 Graphic Designer**
 
