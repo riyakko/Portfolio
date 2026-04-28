@@ -1,318 +1,1191 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio</title>
+    <title>Samantha Rianne T. Mariano | Portfolio</title>
+    <meta name="description" content="Client-focused portfolio for Samantha Rianne T. Mariano, showcasing responsive websites, web systems, and featured projects.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --page-bg: #f4f1ea;
+            --surface: rgba(255, 255, 255, 0.82);
+            --surface-strong: #ffffff;
+            --text: #111827;
+            --muted: #5f6875;
+            --line: rgba(17, 24, 39, 0.08);
+            --accent: #2563eb;
+            --accent-2: #0f766e;
+            --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+            --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.07);
+            --radius-xl: 28px;
+            --radius-lg: 22px;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <!-- box icons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.10), transparent 28%),
+                radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 24%),
+                linear-gradient(180deg, #f8f6f1 0%, #f3efe7 100%);
+            min-height: 100vh;
+        }
+
+        .page-shell {
+            position: relative;
+        }
+
+        .page-shell::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(17, 24, 39, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 24, 39, 0.025) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 90%);
+            opacity: 0.55;
+        }
+
+        .navbar {
+            backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, 0.72) !important;
+            border-bottom: 1px solid rgba(17, 24, 39, 0.06);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--text) !important;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: #3f4a59 !important;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent) !important;
+        }
+
+        .section-card,
+        .portfolio-card,
+        .skill-card,
+        .contact-card,
+        .hero-card {
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            box-shadow: var(--shadow);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(16px);
+        }
+
+        .hero-card {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-card::after {
+            content: '';
+            position: absolute;
+            inset: auto -10% -35% auto;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.18), transparent 70%);
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.10);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 4.8vw, 4.8rem);
+            line-height: 0.96;
+            letter-spacing: -0.06em;
+            font-weight: 800;
+            margin: 1rem 0 1.1rem;
+        }
+
+        .lead-copy {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.95rem;
+            padding: 0.5rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(15, 118, 110, 0.10);
+            color: var(--accent-2);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .availability-badge::before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        }
+
+        .hero-actions .btn,
+        .nav-pills .btn {
+            border-radius: 999px;
+            padding: 0.82rem 1.2rem;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background: var(--text);
+            border-color: var(--text);
+        }
+
+        .btn-primary:hover {
+            background: #0b1120;
+            border-color: #0b1120;
+        }
+
+        .btn-outline-dark {
+            border-color: rgba(17, 24, 39, 0.14);
+            color: var(--text);
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(17, 24, 39, 0.06);
+            border-radius: 20px;
+            padding: 1rem;
+        }
+
+        .metric-card .value {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .metric-card .label {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .profile-image-swap {
+            position: relative;
+            width: min(100%, 330px);
+            aspect-ratio: 1 / 1;
+            margin-left: auto;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transform: rotate(1.5deg);
+        }
+
+        .profile-image-swap::before {
+            content: '';
+            position: absolute;
+            inset: 14px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .profile-image-swap img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, opacity 0.45s ease;
+        }
+
+        .profile-image-swap .hover-img {
+            opacity: 0;
+        }
+
+        .profile-image-swap:hover .hover-img {
+            opacity: 1;
+        }
+
+        .profile-image-swap:hover img {
+            transform: scale(1.03);
+        }
+
+        .section-card {
+            padding: 1.75rem;
+            border-radius: var(--radius-xl);
+            margin-bottom: 1.75rem;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        .section-heading span {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 16px 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            margin-top: 0.45rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.08);
+        }
+
+        .timeline-content {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(17, 24, 39, 0.07);
+        }
+
+        .timeline-item:last-child .timeline-content {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.1rem;
+        }
+
+        .service-card {
+            padding: 1.25rem;
+            border-radius: 24px;
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            background: rgba(255, 255, 255, 0.72);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .service-card h5 {
+            margin-bottom: 0.65rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            margin-bottom: 0;
+            line-height: 1.7;
+        }
+
+        .skill-card {
+            padding: 1.35rem;
+            border-radius: 24px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .skill-card h5 {
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .skill-card p {
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .skill-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .skill-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            border-radius: 999px;
+            padding: 0.62rem 0.95rem;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+
+        .skill-chip::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        }
+
+        .portfolio-item {
+            display: flex;
+            width: 100%;
+        }
+
+        .portfolio-card {
+            overflow: hidden;
+            padding: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .portfolio-card.is-expanded {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 50px rgba(15, 23, 42, 0.14);
+        }
+
+        .project-image-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 22px;
+            background: rgba(17, 24, 39, 0.04);
+            transition: max-height 0.55s ease, transform 0.55s ease, box-shadow 0.55s ease;
+            max-height: 220px;
+            margin-bottom: 0.9rem;
+        }
+
+        .portfolio-card.is-expanded .project-image-wrap {
+            max-height: 72vh;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+        }
+
+        .portfolio-card.is-expanded .project-image-wrap::after {
+            content: 'Expanded preview';
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            z-index: 2;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(17, 24, 39, 0.72);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.55s ease, height 0.55s ease, object-fit 0.55s ease;
+        }
+
+        .portfolio-card.is-expanded .project-image-wrap img {
+            height: min(72vh, 760px);
+            object-fit: contain;
+            transform: scale(1.01);
+        }
+
+        .project-label {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            margin-top: 0.15rem;
+            margin-bottom: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(15, 118, 110, 0.10);
+            color: var(--accent-2);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .portfolio-card h5 {
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .portfolio-card p {
+            color: var(--muted);
+            margin-bottom: 0.9rem;
+        }
+
+        .project-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1.1rem;
+            padding-top: 0.2rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(17, 24, 39, 0.1);
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--text);
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .project-link.primary,
+        .project-link.live-site {
+            background: var(--text);
+            border-color: var(--text);
+            color: #fff;
+        }
+
+        .project-link.github {
+            background: rgba(37, 99, 235, 0.09);
+            border-color: rgba(37, 99, 235, 0.18);
+            color: var(--accent);
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+        }
+
+        .project-link.primary:hover,
+        .project-link.live-site:hover {
+            background: #0b1120;
+            border-color: #0b1120;
+            color: #fff;
+        }
+
+        .project-link.github:hover {
+            background: rgba(37, 99, 235, 0.14);
+            border-color: rgba(37, 99, 235, 0.28);
+            color: var(--accent);
+        }
+
+        .project-image.contain-preview {
+            object-fit: contain;
+            background: linear-gradient(135deg, rgba(247, 238, 226, 0.95), rgba(255, 255, 255, 0.98));
+            padding: 1rem;
+        }
+
+        .project-role {
+            margin-top: auto;
+            border-top: 1px solid rgba(17, 24, 39, 0.08);
+            padding-top: 0.95rem;
+        }
+
+        .project-role summary {
+            cursor: pointer;
+            list-style: none;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .project-role summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .project-role[open] summary {
+            color: var(--accent-2);
+        }
+
+        .project-meta {
+            margin-top: 0.9rem;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+
+        .project-meta p {
+            margin: 0 0 0.65rem;
+        }
+
+        .project-meta ul {
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        .project-meta li + li {
+            margin-top: 0.35rem;
+        }
+
+        .contact-card {
+            padding: 1.7rem;
+        }
+
+        .contact-list a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .contact-list a:hover {
+            text-decoration: underline;
+        }
+
+        .site-footer {
+            margin: 0.25rem 0 1.5rem;
+            padding: 1.7rem;
+            border-radius: var(--radius-xl);
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+
+        .cta-strip {
+            margin: 0 0 1rem;
+            padding: 1.25rem 1.4rem;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.10), rgba(37, 99, 235, 0.08));
+            border: 1px solid rgba(17, 24, 39, 0.07);
+        }
+
+        .cta-strip h3 {
+            margin: 0 0 0.35rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .cta-strip p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .cta-strip .btn {
+            white-space: nowrap;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 1.25rem;
+            align-items: start;
+        }
+
+        .footer-title {
+            margin: 0 0 0.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .footer-copy {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .footer-heading {
+            margin: 0 0 0.9rem;
+            font-size: 0.9rem;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: var(--accent-2);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(17, 24, 39, 0.08);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        .fade-up {
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .fade-up.delay-1 {
+            animation-delay: 0.08s;
+        }
+
+        .fade-up.delay-2 {
+            animation-delay: 0.16s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .metric-grid,
+            .service-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-image-swap {
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .hero-title {
+                font-size: clamp(2.15rem, 10vw, 3.25rem);
+            }
+
+            .cta-strip {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-card {
+                padding: 1.2rem;
+                border-radius: 24px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .portfolio-card img {
+                height: 200px;
+            }
+
+            .portfolio-card.is-expanded .project-image-wrap {
+                max-height: 56vh;
+            }
+
+            .portfolio-card.is-expanded .project-image-wrap img {
+                height: min(56vh, 520px);
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-    <!-- header design -->
-    <header class="header">
-        <a href="#" class="logo">Portfolio.<span class="animate" style="--i:1;"></span></a>
-
-        <div class="bx bx-menu" id="menu-icon"><span class="animate" style="--i:2;"></span></div>
-
-        <nav class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#works">Works</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-            <span class="active-nav"></span>
-            <span class="animate" style="--i:2;"></span>
+    <div class="page-shell">
+        <nav class="navbar navbar-expand-lg sticky-top navbar-light">
+            <div class="container py-2">
+                <a class="navbar-brand" href="#home">My Portfolio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
-    </header>
 
-    <!-- home section design -->
-    <section class="home show-animate" id="home">
-        <div class="home-content">
-            <h1>Hi, I'm <span>Samantha Rianne T. Mariano</span><span class="animate" style="--i:2;"></span></h1>
-            <div class="text-animate">
-                <h3>Front-End Developer</h3>
-                <span class="animate" style="--i:3;"></span>
-            </div>
-            <p>I am a dedicated, self-assured, and eager learner who is constantly looking for opportunities to pick up the new abilities. I particularly want to put my knowledge and experience in Graphic Design, Web Development, and Android Development
-                to use. To the best of my knowledge, avidly seeks to serve a professional organization with sincere devotion, diligence, and commitment. I have six years of experience in editing starting off with youtube videos down to school projects,
-                therefore I also have knowledge with video editing.
-                <span class="animate" style="--i:4;"></span>
-            </p>
+        <main class="container py-4 py-md-5 position-relative">
+            <section id="home" class="hero-card section-card mb-4">
+                <div class="row align-items-center g-4 g-lg-5">
+                    <div class="col-lg-7 order-2 order-lg-1">
+                        <div class="availability-badge">Open for freelance websites and client projects</div>
+                        <span class="eyebrow">Samantha Rianne T. Mariano</span>
+                        <h1 class="hero-title">I Build Clean, Client-Ready Websites That Help Brands Stand Out</h1>
+                        <p class="lead-copy mb-4">
+                            I am a passionate student and aspiring developer from National University Dasmariñas.
+                            I design responsive websites and systems with a focus on clarity, credibility, and strong visual presentation.
+                        </p>
+                        <p class="lead-copy mb-4">
+                            My work combines front-end design, system development, and database integration.
+                            I help businesses and organizations present their services clearly, guide visitors to action, and look more professional online.
+                        </p>
 
-            <div class="btn-box">
-                <a href="#contact" class="btn">Hire Me</a>
-                <a href="#contact" class="btn">Let's Talk</a>
-                <span class="animate" style="--i:5;"></span>
-            </div>
-        </div>
+                        <div class="hero-actions d-flex flex-column flex-sm-row gap-3">
+                            <a class="btn btn-primary" href="#projects">View Projects</a>
+                            <a class="btn btn-outline-dark" href="#contact">Contact Me</a>
+                        </div>
 
-        <div class="home-sci">
-            <a href="https://www.facebook.com/samantharianne.mariano/" target="_blank" rel="noopener noreferrer"><i class='bx bxl-facebook'></i></a>
-            <span class="animate" style="--i:6;"></span>
-        </div>
-
-        <div class="home-imgHover"></div>
-        <span class="animate home-img" style="--i:7; background-image: url('portfolio.png'); background-size: cover; background-position: center;"></span>
-    </section>
-
-    <!-- about section design -->
-    <section class="about" id="about">
-        <h2 class="heading">About <span>Me</span><span class="animate scroll" style="--i:1;"></span></h2>
-
-        <div class="about-img">
-            <img src="p1.png" alt="">
-            <span class="circle-spin"></span>
-            <span class="animate scroll" style="--i:2;"></span>
-        </div>
-
-        <div class="about-content">
-            <h3>Hi there! Glad to see you here.<span class="animate scroll" style="--i:3;"></span></h3>
-            <p>Hello! Samantha Rianne Mariano here. A technology fanatic!<br> Currently, I am enrolled in the Department of Information Technology at National University at Dasmariñas. My early education was completed from Paliparan Elementary, Junior, and
-                Senior Schools.
-                <span class="animate scroll" style="--i:4;"></span>
-            </p>
-
-            <div class="btn-box btns">
-                <a href="#contact" class="btn">Contact Me</a>
-                <span class="animate scroll" style="--i:5;"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- education section design -->
-    <section class="education" id="education">
-        <h2 class="heading">My <span>Journey</span><span class="animate scroll" style="--i:1;"></span></h2>
-
-        <div class="education-row">
-            <div class="education-column">
-                <h3 class="title">Education<span class="animate scroll" style="--i:2;"></span></h3>
-
-                <div class="education-box">
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2018 - 2022</div>
-                            <h3>Paliparan National High School</h3>
-                            <p>Graduated with Honors, a dedicated member of the Supreme Student Government, and a committed member of the YES-O community.</p>
+                        <div class="metric-grid">
+                            <div class="metric-card">
+                                <span class="value">4+</span>
+                                <span class="label">Featured Projects</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="value">3</span>
+                                <span class="label">Core Specialties</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="value">2023</span>
+                                <span class="label">Started BSIT Journey</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2022 - 2024</div>
-                            <h3>Academic Track - STEM Strand</h3>
-                            <p>Graduated with Honors, awarded with the Best Research, and became a participant of the 2022 National Research Fair.</p>
+                    <div class="col-lg-5 order-1 order-lg-2 text-center">
+                        <div class="profile-image-swap fade-up delay-1">
+                            <img src="IMAGES/PORTFOLIO IMG.jpg" alt="Portfolio portrait">
+                            <img src="IMAGES/HANSOHEE.jpg" alt="Alternate portrait" class="hover-img">
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2024 - Present</div>
-                            <h3>Undergraduate - University</h3>
-                            <p>Consistent Dean's Lister with an average GPA of 3.90, the First Year Representative of all BSIT Students, a Video Editor in Computer Society, and the Treasurer of the ISite group.</p>
+            <section id="services" class="section-card fade-up delay-1">
+                <div class="section-heading">
+                    <div>
+                        <h2>Services</h2>
+                        <span>What I can help clients build</span>
+                    </div>
+                </div>
+
+                <div class="service-grid">
+                    <article class="service-card">
+                        <h5>Business Websites</h5>
+                        <p>Clean landing pages, product showcases, and service sites that make a strong first impression and guide visitors to contact you.</p>
+                    </article>
+                    <article class="service-card">
+                        <h5>Responsive Redesigns</h5>
+                        <p>Modern layouts and mobile-friendly updates that improve readability, trust, and the overall user experience across devices.</p>
+                    </article>
+                    <article class="service-card">
+                        <h5>Web Systems</h5>
+                        <p>Functional websites with forms, dashboards, and database integration for businesses that need more than a static page.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="about" class="section-card fade-up delay-1">
+                <div class="section-heading">
+                    <div>
+                        <h2>Education</h2>
+                        <span>Academic background and milestones</span>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <p class="mb-1 fw-bold">National University Dasmarinas</p>
+                            <p class="text-muted mb-0">Bachelor of Science in Information Technology, Specialization in Mobile and Web Application (2023 - Present)</p>
                         </div>
                     </div>
-
-                    <span class="animate scroll" style="--i:3;"></span>
-                </div>
-            </div>
-
-            <div class="education-column">
-                <h3 class="title">Experience<span class="animate scroll" style="--i:5;"></span></h3>
-
-                <div class="education-box">
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2020 - 2021</div>
-                            <h3>Freelance Video Editor</h3>
-                            <p>Worked as a Freelance Video Editor, creating content for clients including social media clips and promotional videos. Edited footage, added effects, and ensured timely delivery using tools like Adobe Premiere Pro. Developed
-                                strong skills in visual storytelling and client communication.</p>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <p class="mb-1 fw-bold">Paliparan III Senior High School</p>
+                            <p class="text-muted mb-0">Senior High School (2019 - 2023)</p>
                         </div>
                     </div>
-
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2021 - 2023</div>
-                            <h3>Freelance Graphic Designer</h3>
-                            <p>Created visual content for clients, including logos, posters, and social media materials. Focused on clean, effective designs using tools like Adobe Photoshop and Illustrator to meet branding needs and tight deadlines.</p>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <p class="mb-1 fw-bold">Paliparan III National High School</p>
+                            <p class="text-muted mb-0">Junior High School (2013 - 2019)</p>
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    <div class="education-content">
-                        <div class="content">
-                            <div class="year"><i class='bx bxs-calendar'></i> 2023 - Present</div>
-                            <h3>Freelance Software Developer</h3>
-                            <p>Developing custom software solutions for clients, including websites and small-scale applications. Skilled in modern programming languages and frameworks, with a focus on functionality, clean code, and user-friendly design.</p>
+            <section id="skills" class="section-card fade-up delay-2">
+                <div class="section-heading">
+                    <div>
+                        <h2>Skills</h2>
+                        <span>A more structured view of the tools I use</span>
+                    </div>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h5>Frontend</h5>
+                        <p>Building responsive interfaces with attention to layout, hierarchy, and user experience.</p>
+                        <div class="skill-chips">
+                            <span class="skill-chip">HTML</span>
+                            <span class="skill-chip">CSS</span>
+                            <span class="skill-chip">Bootstrap</span>
+                            <span class="skill-chip">UI/UX</span>
                         </div>
                     </div>
-
-                    <span class="animate scroll" style="--i:6;"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- works section design -->
-    <section class="works" id="works">
-        <h2 class="heading">My <span>Works</span><span class="animate scroll" style="--i:1;"></span></h2>
-
-        <div class="works-row" style="display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;">
-            <div class="work-item" style="flex: 1 1 300px; max-width: 350px; background: #05203bce; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center;">
-                <img src="w1.png" alt="" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-                <h3>Game Application Development</h3>
-                <p>A click to interact kind of game where the main character Oleg, a humble Filipino Fisherman, finishes 3 games in 3 different levels before he finishes his adventure to save his community.</p>
-            </div>
-            <div class="work-item" style="flex: 1 1 300px; max-width: 350px; background: #05203bce; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center;">
-                <img src="w2.png" alt="" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-                <h3>Website Development</h3>
-                <p>Developed a website for our Senior High School project, featuring user-friendly navigation and interactive elements. Showcasing the skills of STEM students.</p>
-            </div>
-            <div class="work-item" style="flex: 1 1 300px; max-width: 350px; background: #05203bce; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center;">
-                <img src="w3.png" alt="" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-                <h3>Graphic Design Portfolio</h3>
-                <p>Created a portfolio showcasing various graphic design projects, emphasizing creativity and technical skills.</p>
-            </div>
-        </div>
-        <span class="animate scroll" style="--i:2;"></span>
-    </section>
-
-    <!-- skills section design -->
-    <section class="skills" id="skills">
-        <h2 class="heading">My <span>Skills</span><span class="animate scroll" style="--i:1;"></span></h2>
-
-        <div class="skills-row">
-            <div class="skills-column">
-                <h3 class="title">Coding Skills<span class="animate scroll" style="--i:2;"></span></h3>
-
-                <div class="skills-box">
-                    <div class="skills-content">
-                        <div class="progress">
-                            <h3>HTML <span>83%</span></h3>
-                            <div class="bar"><span></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <h3>CSS <span>74%</span></h3>
-                            <div class="bar"><span></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <h3>JavaScript <span>65%</span></h3>
-                            <div class="bar"><span></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <h3>Java <span>90%</span></h3>
-                            <div class="bar"><span></span></div>
+                    <div class="skill-card">
+                        <h5>Backend</h5>
+                        <p>Working with server-side logic and data handling for functional web systems.</p>
+                        <div class="skill-chips">
+                            <span class="skill-chip">Java</span>
+                            <span class="skill-chip">PHP</span>
+                            <span class="skill-chip">MySQL</span>
+                            <span class="skill-chip">Git</span>
                         </div>
                     </div>
-
-                    <span class="animate scroll" style="--i:3;"></span>
-                </div>
-            </div>
-
-            <div class="skills-column">
-                <h3 class="title">Professional Skills<span class="animate scroll" style="--i:5;"></span></h3>
-
-                <div class="skills-box">
-                    <div class="skills-content">
-                        <div class="progress">
-                            <h3>Web Design <span>90%</span></h3>
-                            <div class="bar"><span></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <h3>Web Development <span>70%</span></h3>
-                            <div class="bar"><span></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <h3>Graphic Design <span>95%</span></h3>
-                            <div class="bar"><span></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <h3>Video Editing <span>90%</span></h3>
-                            <div class="bar"><span></span></div>
+                    <div class="skill-card">
+                        <h5>Currently Growing</h5>
+                        <p>Focused on expanding my ability to build interactive and modern web applications.</p>
+                        <div class="skill-chips">
+                            <span class="skill-chip">JavaScript</span>
+                            <span class="skill-chip">React.js</span>
+                            <span class="skill-chip">Component Design</span>
                         </div>
                     </div>
-
-                    <span class="animate scroll" style="--i:6;"></span>
+                    <div class="skill-card">
+                        <h5>Strengths</h5>
+                        <p>Strong collaboration and consistency across UI implementation and system development.</p>
+                        <div class="skill-chips">
+                            <span class="skill-chip">Problem Solving</span>
+                            <span class="skill-chip">Team Leadership</span>
+                            <span class="skill-chip">Responsive Design</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- contact section design -->
-    <section class="contact" id="contact">
-        <h2 class="heading">Contact <span>Me</span><span class="animate scroll" style="--i:1;"></span></h2>
-
-        <form action="mailto:sammariano102606@gmail.com" method="POST" enctype="text/plain">
-            <div class="input-box">
-                <div class="input-field">
-                    <input type="text" name="Full Name" placeholder="Full Name" required>
-                    <span class="focus"></span>
-                </div>
-                <div class="input-field">
-                    <input type="email" name="Email" placeholder="Email" required>
-                    <span class="focus"></span>
+            <section id="projects" class="section-card fade-up delay-2">
+                <div class="section-heading">
+                    <div>
+                        <h2>Projects</h2>
+                        <span>Selected work with role details</span>
+                    </div>
                 </div>
 
-                <span class="animate scroll" style="--i:3;"></span>
-            </div>
-            <div class="input-box">
-                <div class="input-field">
-                    <input type="number" name="Mobile Number" placeholder="Mobile Number" required>
-                    <span class="focus"></span>
+                <div class="row align-items-stretch g-4">
+                    <div class="col-lg-3 col-md-6 portfolio-item">
+                        <article class="portfolio-card">
+                            <div class="project-image-wrap">
+                                <img src="IMAGES/CARGO CONNECT.png" alt="CargoConnect System project preview" class="project-image">
+                            </div>
+                            <span class="project-label">Web System</span>
+                            <h5>CargoConnect System</h5>
+                            <p>
+                                A logistics tracking website designed for small businesses.
+                                Features include shipment booking, real-time tracking, and rate calculation.
+                            </p>
+                            <p class="project-impact"><strong>Impact:</strong> Gives small businesses a cleaner way to present shipments and improves client trust with real-time tracking.</p>
+                            <details class="project-role">
+                                <summary>View role details</summary>
+                                <div class="project-meta">
+                                    <p><strong>Role:</strong> Full-Stack Developer</p>
+                                    <p><strong>Tech Stack:</strong> HTML, CSS, Bootstrap, JavaScript, PHP, MySQL</p>
+                                    <p><strong>Responsibilities:</strong></p>
+                                    <ul>
+                                        <li>Led the development team.</li>
+                                        <li>Designed and implemented responsive pages.</li>
+                                        <li>Built reusable UI components for forms and cards.</li>
+                                        <li>Improved mobile layout and accessibility.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <div class="project-actions">
+                                <a class="project-link live-site" href="http://cargoconnect.atwebpages.com/" target="_blank" rel="noreferrer">Open Website</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-lg-3 col-md-6 portfolio-item">
+                        <article class="portfolio-card">
+                            <div class="project-image-wrap">
+                                <img src="IMAGES/ISKONEK.png" alt="ISKOnek Enrollment System project preview" class="project-image">
+                            </div>
+                            <span class="project-label">Desktop / Java</span>
+                            <h5>ISKOnek Enrollment System</h5>
+                            <p>
+                                A Java-based enrollment system with login authentication, student dashboard,
+                                and database integration for managing records efficiently.
+                            </p>
+                            <p class="project-impact"><strong>Impact:</strong> Streamlines enrollment handling by reducing manual record work and organizing student data in one system.</p>
+                            <details class="project-role">
+                                <summary>View role details</summary>
+                                <div class="project-meta">
+                                    <p><strong>Role:</strong> Full-Stack Developer</p>
+                                    <p><strong>Tech Stack:</strong> Java, MySQL, JDBC</p>
+                                    <p><strong>Responsibilities:</strong></p>
+                                    <ul>
+                                        <li>Led the development team.</li>
+                                        <li>Implemented login authentication and user validation.</li>
+                                        <li>Designed database schema and CRUD operations.</li>
+                                        <li>Connected backend logic to the student dashboard.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <div class="project-actions">
+                                <a class="project-link github" href="https://github.com/riyakko" target="_blank" rel="noreferrer">See in GitHub</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-lg-3 col-md-6 portfolio-item">
+                        <article class="portfolio-card">
+                            <div class="project-image-wrap">
+                                <img src="IMAGES/GROWBIT.jpg" alt="GrowBit project preview" class="project-image">
+                            </div>
+                            <span class="project-label">Productivity App</span>
+                            <h5>GrowBit</h5>
+                            <p>
+                                A web application for tracking and managing habit growth data.
+                                Features include user profiles, data visualization, and goal setting to help users stay motivated.
+                            </p>
+                            <p class="project-impact"><strong>Impact:</strong> Helps users stay consistent by turning habit progress into a clearer, more motivating dashboard experience.</p>
+                            <details class="project-role">
+                                <summary>View role details</summary>
+                                <div class="project-meta">
+                                    <p><strong>Role:</strong> Full-Stack Developer</p>
+                                    <p><strong>Tech Stack:</strong> Java, XML, PHP, MySQL</p>
+                                    <p><strong>Responsibilities:</strong></p>
+                                    <ul>
+                                        <li>Led the development team.</li>
+                                        <li>Developed user interface and profile features.</li>
+                                        <li>Integrated data handling for habit progress tracking.</li>
+                                        <li>Implemented dashboard views for goals and analytics.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <div class="project-actions">
+                                <a class="project-link github" href="https://github.com/riyakko" target="_blank" rel="noreferrer">See in GitHub</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-lg-3 col-md-6 portfolio-item">
+                        <article class="portfolio-card">
+                            <div class="project-image-wrap">
+                                <img src="IMAGES/BRAND LOGO.png" alt="Millie's Munchies business website preview" class="project-image contain-preview">
+                            </div>
+                            <span class="project-label">Business Website</span>
+                            <h5>Millie's Munchies</h5>
+                            <p>
+                                A cozy-modern bakery storefront built to present the brand, highlight products, and make ordering feel simple and inviting.
+                            </p>
+                            <p class="project-impact"><strong>Impact:</strong> Gives the bakery a stronger online presence and makes it easier for customers to browse and place orders.</p>
+                            <details class="project-role">
+                                <summary>View role details</summary>
+                                <div class="project-meta">
+                                    <p><strong>Role:</strong> Front-End Developer &amp; Website Designer</p>
+                                    <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+                                    <p><strong>Responsibilities:</strong></p>
+                                    <ul>
+                                        <li>Designed the bakery branding and page structure.</li>
+                                        <li>Built a customer-friendly hero, menu, and contact flow.</li>
+                                        <li>Kept the site warm, clear, and responsive across screens.</li>
+                                        <li>Focused on calls to action that support orders and inquiries.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <div class="project-actions">
+                                <a class="project-link live-site" href="https://github.com/riyakko/MilliesMunchiesWeb" target="_blank" rel="noreferrer">Open Website</a>
+                            </div>
+                        </article>
+                    </div>
                 </div>
-                <div class="input-field">
-                    <input type="text" name="Email Subject" placeholder="Email Subject" required>
-                    <span class="focus"></span>
+            </section>
+
+            <section class="section-card fade-up">
+                <div class="section-heading">
+                    <div>
+                        <h2>Currently Learning</h2>
+                        <span>What I am building next</span>
+                    </div>
+                </div>
+                <p class="lead-copy mb-0">
+                    I am currently learning JavaScript to enhance my front-end development skills and create more interactive web applications. I am also exploring React.js to build dynamic user interfaces and improve my proficiency in modern web development frameworks.
+                </p>
+            </section>
+
+            <section id="contact" class="contact-card fade-up delay-1 mb-2">
+                <div class="section-heading">
+                    <div>
+                        <h2>Contact</h2>
+                        <span>Let’s connect</span>
+                    </div>
+                </div>
+                <p class="lead-copy">
+                    If you need a website that feels polished, mobile-friendly, and ready to represent your brand, feel free to reach out.
+                </p>
+                <ul class="list-unstyled contact-list mb-0">
+                    <li class="mb-2"><strong>Email:</strong> <a href="mailto:sammariano2345@gmail.com">sammariano2345@gmail.com</a></li>
+                    <li class="mb-2"><strong>Github:</strong> <a href="https://github.com/riyakko" target="_blank" rel="noreferrer">riyakko</a></li>
+                    <li><strong>Instagram:</strong> <a href="https://www.instagram.com/svranie/" target="_blank" rel="noreferrer">svranie</a></li>
+                </ul>
+            </section>
+
+            <section class="cta-strip fade-up delay-1">
+                <div>
+                    <h3>Ready to build your website?</h3>
+                    <p>Let’s create something clean, responsive, and client-ready for your brand or business.</p>
+                </div>
+                <a class="btn btn-primary" href="mailto:sammariano2345@gmail.com">Start a Project</a>
+            </section>
+
+            <footer class="site-footer fade-up delay-1">
+                <div class="footer-grid">
+                    <div>
+                        <h3 class="footer-title">Samantha Rianne T. Mariano</h3>
+                        <p class="footer-copy">Aspiring web developer creating polished, responsive websites and systems that help brands look credible and client-ready.</p>
+                    </div>
+
+                    <div>
+                        <p class="footer-heading">Quick Links</p>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="footer-heading">Project Links</p>
+                        <ul class="footer-links">
+                            <li><a href="http://cargoconnect.atwebpages.com/" target="_blank" rel="noreferrer">CargoConnect Website</a></li>
+                            <li><a href="https://github.com/riyakko" target="_blank" rel="noreferrer">ISKOnek on GitHub</a></li>
+                            <li><a href="https://github.com/riyakko" target="_blank" rel="noreferrer">GrowBit on GitHub</a></li>
+                            <li><a href="https://milliesmunchies.xo.je/" target="_blank" rel="noreferrer">Millie's Munchies Website</a></li>
+                        </ul>
+                    </div>
                 </div>
 
-                <span class="animate scroll" style="--i:5;"></span>
-            </div>
+                <div class="footer-bottom">
+                    <span>© <span id="year">2026</span> Samantha Rianne T. Mariano. All rights reserved.</span>
+                    <span>Available for client inquiries at <a href="mailto:sammariano2345@gmail.com">sammariano2345@gmail.com</a></span>
+                </div>
+            </footer>
+        </main>
+    </div>
 
-            <div class="textarea-field">
-                <textarea name="Message" cols="30" rows="10" placeholder="Your Message" required></textarea>
-                <span class="focus"></span>
+    <script>
+        const yearElement = document.getElementById('year');
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
 
-                <span class="animate scroll" style="--i:7;"></span>
-            </div>
+        document.querySelectorAll('.portfolio-card').forEach((card) => {
+            const details = card.querySelector('.project-role');
 
-            <div class="btn-box btns">
-                <button type="submit" class="btn">Submit</button>
+            if (!details) {
+                return;
+            }
 
-                <span class="animate scroll" style="--i:9;"></span>
-            </div>
-        </form>
-    </section>
-    </section>
+            details.addEventListener('toggle', () => {
+                card.classList.toggle('is-expanded', details.open);
 
-    <!-- footer design -->
-    <footer class="footer">
-        <div class="footer-text">
-            <p>Contact me at sammariano102606@gmail.com | +63 952 486 7450</p>
+                if (details.open) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+    </script>
 
-            <span class="animate scroll" style="--i:1;"></span>
-        </div>
-
-        <div class="footer-iconTop">
-            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
-
-            <span class="animate scroll" style="--i:3;"></span>
-        </div>
-    </footer>
-
-
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
