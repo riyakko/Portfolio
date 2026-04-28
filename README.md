@@ -1,4 +1,4 @@
-# Samantha Rianne T. Mariano — Web Developer Portfolio
+# Samantha Rianne T. Mariano 
 
 ## About Me
 
