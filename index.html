@@ -997,6 +997,315 @@
         .project-link:hover { transform: translateY(-1px); }
         .project-link.live-site:hover { opacity: 0.88; }
 
+        /* ── GRAPHIC DESIGNS SECTION ───────────────────────────── */
+        .design-section {
+            margin-top: 2rem;
+        }
+
+        .design-section .section-heading {
+            margin-bottom: 1.25rem;
+        }
+
+        .design-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .design-thumb {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .design-thumb:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .design-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .design-thumb:hover img { transform: scale(1.07); }
+
+        .design-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(37,99,235,0.82), rgba(15,118,110,0.72));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .design-thumb:hover .design-thumb-overlay { opacity: 1; }
+
+        .design-thumb-overlay svg {
+            width: 28px;
+            height: 28px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transform: translateY(6px);
+            transition: transform 0.3s ease;
+        }
+
+        .design-thumb:hover .design-thumb-overlay svg { transform: translateY(0); }
+
+        .design-thumb-overlay span {
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 700;
+            transform: translateY(6px);
+            transition: transform 0.3s ease 0.05s;
+        }
+
+        .design-thumb:hover .design-thumb-overlay span { transform: translateY(0); }
+
+        /* Add design button */
+        .design-add-card {
+            border-radius: 20px;
+            aspect-ratio: 1;
+            border: 2px dashed rgba(37,99,235,0.25);
+            background: var(--accent-glow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: default;
+            opacity: 0.65;
+            border-radius: 20px;
+        }
+
+        .design-add-card svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ── DESIGN LIGHTBOX MODAL ──────────────────────────────── */
+        .design-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .design-modal-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .design-modal {
+            background: var(--surface-strong);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+            max-width: 820px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(24px) scale(0.97);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .design-modal-backdrop.open .design-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .design-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--line);
+            flex-shrink: 0;
+        }
+
+        .design-modal-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.04em;
+        }
+
+        .design-modal-label {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-left: 0.6rem;
+        }
+
+        .design-modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            color: var(--muted);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .design-modal-close:hover {
+            background: var(--accent-glow);
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .design-modal-image-wrap {
+            position: relative;
+            background: var(--bg2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            max-height: 55vh;
+            overflow: hidden;
+        }
+
+        .design-modal-image-wrap img {
+            max-width: 100%;
+            max-height: 55vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .design-modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 2;
+        }
+
+        .design-modal-nav:hover { background: var(--accent); transform: translateY(-50%) scale(1.08); }
+
+        .design-modal-prev { left: 0.85rem; }
+        .design-modal-nav.design-modal-next { right: 0.85rem; }
+
+        .design-modal-dots {
+            display: flex;
+            gap: 0.45rem;
+            justify-content: center;
+            padding: 0.85rem 1.5rem 0;
+        }
+
+        .design-modal-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--muted);
+            opacity: 0.35;
+            cursor: pointer;
+            transition: opacity 0.2s, background 0.2s, transform 0.2s;
+        }
+
+        .design-modal-dot.active {
+            opacity: 1;
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .design-modal-footer {
+            padding: 1rem 1.5rem 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .design-modal-desc {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 0.85rem;
+        }
+
+        .design-modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .design-modal-tag {
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            font-size: 0.76rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            .design-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .design-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .design-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         /* ── CURRENTLY LEARNING ────────────────────────────────── */
         .learning-grid {
             display: grid;
@@ -1872,6 +2181,90 @@
             </div>
         </section>
 
+        <!-- GRAPHIC DESIGNS -->
+        <section class="card section-card reveal design-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Graphic Designs</h2>
+                    <span>Visual creativity &amp; design work</span>
+                </div>
+                <span class="eyebrow" style="margin-bottom:0;align-self:center;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    Click to preview
+                </span>
+            </div>
+
+            <div class="design-grid">
+                <!-- Design 1 -->
+                <div class="design-thumb" onclick="openDesignModal(0)" role="button" tabindex="0" aria-label="View design: Brand Identity">
+                    <img src="IMAGES/BRAND LOGO.png" alt="Brand Logo Design" loading="lazy">
+                    <div class="design-thumb-overlay">
+                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span>Brand Identity</span>
+                    </div>
+                </div>
+
+                <!-- Design 2 — duplicate as placeholder; replace src with your actual design images -->
+                <div class="design-thumb" onclick="openDesignModal(1)" role="button" tabindex="0" aria-label="View design: Poster Design">
+                    <img src="IMAGES/CARGO CONNECT.png" alt="Poster Design" loading="lazy">
+                    <div class="design-thumb-overlay">
+                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span>Poster Design</span>
+                    </div>
+                </div>
+
+                <!-- Design 3 -->
+                <div class="design-thumb" onclick="openDesignModal(2)" role="button" tabindex="0" aria-label="View design: UI Mockup">
+                    <img src="IMAGES/ISKONEK.png" alt="UI Mockup" loading="lazy">
+                    <div class="design-thumb-overlay">
+                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span>UI Mockup</span>
+                    </div>
+                </div>
+
+                <!-- Design 4 -->
+                <div class="design-thumb" onclick="openDesignModal(3)" role="button" tabindex="0" aria-label="View design: Social Media Graphics">
+                    <img src="IMAGES/GROWBIT.jpg" alt="Social Media Graphics" loading="lazy">
+                    <div class="design-thumb-overlay">
+                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span>Social Media</span>
+                    </div>
+                </div>
+
+                <!-- Placeholder slot: replace the entire .design-add-card block with another .design-thumb when you have more designs -->
+                <div class="design-add-card" title="Add more designs by replacing this block">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                    <span>More coming soon</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- DESIGN LIGHTBOX MODAL -->
+        <div class="design-modal-backdrop" id="designModalBackdrop" role="dialog" aria-modal="true" aria-label="Design preview" onclick="closeDesignModal(event)">
+            <div class="design-modal">
+                <div class="design-modal-header">
+                    <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+                        <span class="design-modal-title" id="modalTitle">Design Preview</span>
+                        <span class="design-modal-label" id="modalLabel">Graphic Design</span>
+                    </div>
+                    <button class="design-modal-close" onclick="closeDesignModal()" aria-label="Close preview">✕</button>
+                </div>
+
+                <div class="design-modal-image-wrap">
+                    <button class="design-modal-nav design-modal-prev" onclick="navigateDesign(-1)" aria-label="Previous design">&#8249;</button>
+                    <img id="modalImage" src="" alt="Design preview">
+                    <button class="design-modal-nav design-modal-next" onclick="navigateDesign(1)" aria-label="Next design">&#8250;</button>
+                </div>
+
+                <div class="design-modal-dots" id="modalDots"></div>
+
+                <div class="design-modal-footer">
+                    <p class="design-modal-desc" id="modalDesc"></p>
+                    <div class="design-modal-tags" id="modalTags"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- CURRENTLY LEARNING -->
         <section class="card section-card reveal">
             <div class="section-heading">
@@ -2156,6 +2549,120 @@
         if (!details) return;
         details.addEventListener('toggle', () => {
             if (details.open) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+
+    // ── Graphic Design Modal ─────────────────────────────────────
+    // Update this array with your actual graphic design images and info!
+    const designItems = [
+        {
+            src:   'IMAGES/BRAND LOGO.png',
+            title: 'Brand Identity',
+            label: 'Branding',
+            desc:  'A complete brand identity design featuring a logo, color palette, and visual language crafted for a modern small business.',
+            tags:  ['Logo Design', 'Branding', 'Illustrator']
+        },
+        {
+            src:   'IMAGES/CARGO CONNECT.png',
+            title: 'Poster Design',
+            label: 'Print',
+            desc:  'A bold promotional poster design with strong typography and gradient-driven composition for a logistics brand.',
+            tags:  ['Poster', 'Typography', 'Photoshop']
+        },
+        {
+            src:   'IMAGES/ISKONEK.png',
+            title: 'UI Mockup',
+            label: 'UI/UX',
+            desc:  'High-fidelity UI mockup showcasing dashboard screens, component layouts, and interactive prototyping in Figma.',
+            tags:  ['Figma', 'UI Design', 'Mockup']
+        },
+        {
+            src:   'IMAGES/GROWBIT.jpg',
+            title: 'Social Media Graphics',
+            label: 'Social Media',
+            desc:  'A series of branded social media graphics with consistent color usage, iconography, and content hierarchy.',
+            tags:  ['Social Media', 'Canva', 'Visual Design'],
+            link:  'https://www.instagram.com/milliesmunchies'
+        }
+    ];
+
+    let currentDesignIndex = 0;
+
+    function openDesignModal(index) {
+        currentDesignIndex = index;
+        renderDesignModal();
+        document.getElementById('designModalBackdrop').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDesignModal(e) {
+        // Only close when clicking the backdrop itself (not the modal box)
+        if (e && e.target !== document.getElementById('designModalBackdrop')) return;
+        document.getElementById('designModalBackdrop').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Allow closing with the ✕ button (no event arg)
+    const origClose = closeDesignModal;
+    window.closeDesignModal = function(e) {
+        if (e === undefined || (e && e.target === document.getElementById('designModalBackdrop'))) {
+            document.getElementById('designModalBackdrop').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    };
+
+    function navigateDesign(dir) {
+        currentDesignIndex = (currentDesignIndex + dir + designItems.length) % designItems.length;
+        renderDesignModal();
+    }
+
+    function renderDesignModal() {
+        const item = designItems[currentDesignIndex];
+        document.getElementById('modalImage').src   = item.src;
+        document.getElementById('modalImage').alt   = item.title;
+        document.getElementById('modalTitle').textContent = item.title;
+        document.getElementById('modalLabel').textContent = item.label;
+        document.getElementById('modalDesc').textContent  = item.desc;
+
+        // Tags
+        const tagsEl = document.getElementById('modalTags');
+        tagsEl.innerHTML = item.tags.map(t => `<span class="design-modal-tag">${t}</span>`).join('');
+
+        // Live link button (only renders when item has a link)
+        const existingBtn = document.getElementById('modalLiveLink');
+        if (existingBtn) existingBtn.remove();
+        if (item.link) {
+            const btn = document.createElement('a');
+            btn.id        = 'modalLiveLink';
+            btn.href      = item.link;
+            btn.target    = '_blank';
+            btn.rel       = 'noreferrer';
+            btn.className = 'btn btn-primary';
+            btn.style.cssText = 'margin-top:1rem;display:inline-flex;align-items:center;gap:0.5rem;';
+            btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> View on Instagram`;
+            document.getElementById('modalTags').after(btn);
+        }
+
+        // Dots
+        const dotsEl = document.getElementById('modalDots');
+        dotsEl.innerHTML = designItems.map((_, i) =>
+            `<span class="design-modal-dot${i === currentDesignIndex ? ' active' : ''}" onclick="currentDesignIndex=${i};renderDesignModal();" role="button" aria-label="Go to design ${i+1}"></span>`
+        ).join('');
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', e => {
+        const modal = document.getElementById('designModalBackdrop');
+        if (!modal.classList.contains('open')) return;
+        if (e.key === 'Escape')      { modal.classList.remove('open'); document.body.style.overflow = ''; }
+        if (e.key === 'ArrowLeft')   navigateDesign(-1);
+        if (e.key === 'ArrowRight')  navigateDesign(1);
+    });
+
+    // Keyboard accessibility for design thumbs
+    document.querySelectorAll('.design-thumb').forEach((thumb, i) => {
+        thumb.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDesignModal(i); }
         });
     });
     </script>
